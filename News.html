@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>News App</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">NewsApp</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Sports</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Weather</a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container my-4">
+    <h1 class="mb-4">Welcome to News App (<span id="resultCount">6</span> Results)</h1>
+
+    <div class="row">
+      <!-- Card Example -->
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <img src="https://www.crikey.com.au/wp-content/uploads/sites/3/2025/09/glenn23sep.jpg?quality=70&w=1024"
+            class="card-img-top" alt="News Image 1">
+          <div class="card-body">
+            <h5 class="card-title">Who wants to be a Milei-aire? Trump ditches America-first to help a mate</h5>
+            <p class="card-text">
+              For a while, Argentina's Trump-style president Javier Milei was fashionable among right-wing economists.
+              Now an all-too-familiar sight is playing out.
+            </p>
+            <a href="#" class="btn btn-primary">Read more</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <img src="https://assets.realclear.com/images/69/697665_6_.jpeg" class="card-img-top" alt="News Image 2">
+          <div class="card-body">
+            <h5 class="card-title">All That Glitters: Overregulation Is Tarnishing the Golden State</h5>
+            <p class="card-text">
+              Bed, Bath & Beyond plans to open 300 new stores in the next two years – though none in California.
+            </p>
+            <a href="#" class="btn btn-primary">Read more</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <img src="https://dam.mediacorp.sg/image/upload/s--K3sAUlTq--/c_fill,g_auto,h_676,w_1200/fl_relative,g_south_east,l_mediacorp:cna:watermark:2024-04:reuters_1,w_0.1/f_auto,q_auto/v1/one-cms/core/2025-09-23T020201Z_1_LYNXNPEL8M017_RTROPTP_3_GLOBAL-MARKETS.JPG?itok=qMUFqJiI" 
+class="card-img-top" alt="News Image 3">
+          <div class="card-body">
+            <h5 class="card-title">Asia stocks ride the AI rush, gold hits another peak</h5>
+            <p class="card-text">
+              Optimism around AI pushes tech stocks higher, and U.S. rate cuts keep gold on a hot streak.
+            </p>
+            <a href="#" class="btn btn-primary">Read more</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <img src="https://ml.globenewswire.com/Resource/Download/1e20a769-ea22-43d3-b0f8-8c37be344244"
+            class="card-img-top" alt="News Image 4">
+          <div class="card-body">
+            <h5 class="card-title">Curbee Appoints Matt Carpenter to Board of Directors</h5>
+            <p class="card-text">
+              Carpenter’s guidance is expected to boost Curbee’s growth and market dominance.
+            </p>
+            <a href="#" class="btn btn-primary">Read more</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <img src="https://imageio.forbes.com/specials-images/imageserve/68d48ead593b557a37847858/0x0.jpg"
+            class="card-img-top" alt="News Image 5">
+          <div class="card-body">
+            <h5 class="card-title">Beyond Lithium: The Next Frontier In Energy Storage</h5>
+            <p class="card-text">
+              As demand surges, sodium-ion, flow, and gravity storage are emerging as future leaders.
+            </p>
+            <a href="#" class="btn btn-primary">Read more</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <img src="https://i.ytimg.com/vi/1u5F-I1GH90/hqdefault.jpg" class="card-img-top" alt="News Image 6">
+          <div class="card-body">
+            <h5 class="card-title">Microsoft Flight Simulator släpps till PlayStation</h5>
+            <p class="card-text">
+              Microsoft Flight Simulator 2024 akan hadir di PlayStation 5, diumumkan dalam event "State of Play".
+            </p>
+            <a href="#" class="btn btn-primary">Read more</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="d-flex justify-content-between mt-4">
+      <button class="btn btn-primary">&lt; Previous Page</button>
+      <button class="btn btn-primary">Next Page &gt;</button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
+  </script>
+
+  <script>
+    const fetchNews = async () => {
+      console.log("Fetching news...");
+
+      const url = 'https://newsapi.org/v2/everything?' +
+        'q=Apple&' +
+        'from=2025-10-02&' +
+        'pageSize=20&' +
+        'page=2&' +
+        'sortBy=popularity&' +
+        'apiKey=beecf5839300404fb3933be42f09e7e3';
+
+      try {
+        const req = new Request(url);
+        const response = await fetch(req);
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        console.error("Error fetching news:", error);
+      }
+    }
+
+    // Call the function if needed
+    // fetchNews();
+  </script>
+</body>
+
+</html>

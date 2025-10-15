@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>News App</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">NewsApp</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Sports</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Weather</a></li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" id="searchInput" />
+          <button class="btn btn-outline-success" type="button" id="searchBtn">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container my-4">
+    <h1 class="mb-4">Welcome to News App (<span id="resultCount">6</span> Results)</h1>
+
+    <div class="row" id="newsContainer">
+      <!-- Static Cards -->
+      <div class="col-md-4 mb-4">
+  <div class="card h-100">
+    <img src="https://www.crikey.com.au/wp-content/uploads/sites/3/2025/09/glenn23sep.jpg?quality=70&w=1024"
+      class="card-img-top" alt="News Image 1">
+    <div class="card-body">
+      <h5 class="card-title">Who wants to be a Milei-aire?</h5>
+      <p class="card-text">Trump ditches America-first to help a mate in Argentina.</p>
+      <a href="https://www.crikey.com.au/2025/09/23/milei-trump-america-first-argentina/" target="_blank" class="btn btn-primary">Read more</a>
+    </div>
+    </div>
+</div>
+
+      <!-- Tambahkan 5 card lainnya di sini sesuai kebutuhan -->
+      <!-- ... -->
+
+    </div>
+
+    <!-- Pagination Buttons -->
+    <div class="d-flex justify-content-between mt-4">
+      <button class="btn btn-primary" id="prevPageBtn">&lt; Previous Page</button>
+      <button class="btn btn-primary" id="nextPageBtn">Next Page &gt;</button>
+    </div>
+  </div>
+
+  <!-- Bootstrap & jQuery -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    let currentPage = 1;
+    const pageSize = 6;
+
+    function fetchNews(query = "Apple", page = 1) {
+      const apiKey = "beecf5839300404fb3933be42f09e7e3";
+      const fromDate = "2025-10-02";
+      const url = `https://newsapi.org/v2/everything?q=${query}&from=${fromDate}&pageSize=${pageSize}&page=${page}&sortBy=popularity&apiKey=${apiKey}`;
+
+      $("#newsContainer").html(`<p>Loading...</p>`);
+
+      $.get(url, function (data) {
+        if (data.status === "ok") {
+          $("#newsContainer").empty();
+          $("#resultCount").text(data.totalResults);
+
+          if (data.articles.length === 0) {
+            $("#newsContainer").html(`<p>No articles found.</p>`);
+          }
+
+          data.articles.forEach(article => {
+            const card = `
+              <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                  <img src="${article.urlToImage || 'https://via.placeholder.com/400x200?text=No+Image'}"
+                       class="card-img-top" alt="News Image">
+                  <div class="card-body">
+                    <h5 class="card-title">${article.title || "No title"}</h5>
+                    <p class="card-text">${article.description || "No description available."}</p>
+                    <a href="${article.url}" target="_blank" class="btn btn-primary">Read more</a>
+                  </div>
+                </div>
+              </div>`;
+            $("#newsContainer").append(card);
+          });
+        } else {
+          $("#newsContainer").html(`<p>Error loading articles.</p>`);
+        }
+      }).fail(function () {
+        $("#newsContainer").html(`<p>Failed to fetch news. Please check your API key or internet connection.</p>`);
+      });
+    }
+
+    // Search & Pagination Handlers
+    $(document).ready(function () {
+      $("#searchBtn").click(function () {
+        currentPage = 1;
+        const query = $("#searchInput").val().trim();
+        if (query) {
+          fetchNews(query, currentPage);
+        }
+      });
+
+      $("#nextPageBtn").click(function () {
+        currentPage++;
+        const query = $("#searchInput").val().trim() || "Apple";
+        fetchNews(query, currentPage);
+      });
+
+      $("#prevPageBtn").click(function () {
+        if (currentPage > 1) {
+          currentPage--;
+          const query = $("#searchInput").val().trim() || "Apple";
+          fetchNews(query, currentPage);
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
