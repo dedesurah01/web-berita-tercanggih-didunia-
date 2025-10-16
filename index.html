@@ -35,23 +35,10 @@
 
   <!-- Main Content -->
   <div class="container my-4">
-    <h1 class="mb-4">Welcome to News App (<span id="resultCount">6</span> Results)</h1>
+    <h1 class="mb-4">Welcome to News App (<span id="resultCount">0</span> Results)</h1>
 
     <div class="row" id="newsContainer">
-      <!-- Static card example (1 shown) -->
-      <div class="col-md-4 mb-4">
-        <div class="card h-100">
-          <img src="https://www.crikey.com.au/wp-content/uploads/sites/3/2025/09/glenn23sep.jpg?quality=70&w=1024"
-            class="card-img-top" alt="News Image 1">
-          <div class="card-body">
-            <h5 class="card-title">Who wants to be a Milei-aire?</h5>
-            <p class="card-text">Trump ditches America-first to help a mate in Argentina.</p>
-            <a href="https://www.crikey.com.au/2025/09/23/argentina-peso-currency-javier-milei-donald-trump-united-states/" target="_blank" class="btn btn-primary">Read more</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tambahkan 5 card lainnya jika ingin -->
+      <!-- News cards will be loaded here -->
     </div>
 
     <!-- Pagination Buttons -->
@@ -68,11 +55,12 @@
   <script>
     let currentPage = 1;
     const pageSize = 6;
+    let currentQuery = "Apple"; // Default search
 
     function fetchNews(query = "Apple", page = 1) {
-      const apiKey = "beecf5839300404fb3933be42f09e7e3";
+      const apiKey = "beecf5839300404fb3933be42f09e7e3"; // ⚠️ Move to backend for production use
       const fromDate = "2025-10-02";
-      const url = `https://newsapi.org/v2/everything?q=${query}&from=${fromDate}&pageSize=${pageSize}&page=${page}&sortBy=popularity&apiKey=${apiKey}`;
+      const url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&from=${fromDate}&pageSize=${pageSize}&page=${page}&sortBy=publishedAt&apiKey=${apiKey}`;
 
       $("#newsContainer").html(`<p>Loading...</p>`);
 
@@ -83,6 +71,7 @@
 
           if (data.articles.length === 0) {
             $("#newsContainer").html(`<p>No articles found.</p>`);
+            return;
           }
 
           data.articles.forEach(article => {
@@ -109,25 +98,27 @@
     }
 
     $(document).ready(function () {
+      // Initial fetch
+      fetchNews(currentQuery, currentPage);
+
       $("#searchBtn").click(function () {
-        currentPage = 1;
         const query = $("#searchInput").val().trim();
         if (query) {
-          fetchNews(query, currentPage);
+          currentQuery = query;
+          currentPage = 1;
+          fetchNews(currentQuery, currentPage);
         }
       });
 
       $("#nextPageBtn").click(function () {
         currentPage++;
-        const query = $("#searchInput").val().trim() || "Apple";
-        fetchNews(query, currentPage);
+        fetchNews(currentQuery, currentPage);
       });
 
       $("#prevPageBtn").click(function () {
         if (currentPage > 1) {
           currentPage--;
-          const query = $("#searchInput").val().trim() || "Apple";
-          fetchNews(query, currentPage);
+          fetchNews(currentQuery, currentPage);
         }
       });
     });
